@@ -172,7 +172,7 @@ export class TreeviewComponent implements OnChanges {
     }
 
     private filterItem(item: TreeviewItem, filterText: string): TreeviewItem {
-        const isMatch = includes(item.text.toLowerCase(), filterText);
+        const isMatch = includes((item.text.toLowerCase()).normalize('NFD').replace(/[\u0300-\u036f]/g, ""), filterText.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
         if (isMatch) {
             return item;
         } else {
